@@ -31,15 +31,21 @@
         id=#{id}
     </delete>
 
+    <!--sql 元素可以定义可复用的 SQL 代码段-->
+    <sql id="selectAll">
+        select * from user
+    </sql>
     <!-- 如未为 Java Bean 起类别名，resultType="com.guc.mybatis.entity.User" -->
 
     <!-- 使用 resultType 时，一定要保证，你属性名与字段名相同；如果不相同，就使用 resultMap -->
     <select id="selectById" parameterType="int" resultType="User">
-        select * from user where id=#{id}
+        /*select * from user */
+        <include refid="selectAll"/>
+        where id=#{id}
     </select>
 
     <select id="selectAll" resultMap="userMap">
-        select * from user
+        select * from user order by id desc
     </select>
 
 </mapper>

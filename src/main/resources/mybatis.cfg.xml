@@ -43,7 +43,11 @@
     </environments>
 
     <mappers>
-        <!-- 通过 mapper 接口包加载整个包的映射文件 -->
+        <!--通过 resource 加载单个映射文件-->
+        <mapper resource="com/guc/mybatis/mapper/UserMapper.xml"/>
+        <!-- 3、通过 mapper 接口包加载整个包的映射文件 -->
+<!--
         <package name="com.guc.mybatis.mapper"/>
+-->
     </mappers>
 </configuration>

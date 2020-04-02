@@ -33,6 +33,28 @@ Mybatis 也是基于 JDBC 的。Java 与数据库操作仅能通过 JDBC 完成�
 * plugins 插件
 * environments 环境
   * environment 环境变量
-  * transactionManager 事务管理器
+  * transactionManager 事务管理器 两种[JDBC|MANAGED]
 * databaseIdProvider 数据库厂商标识
 * mappers 映射器
+  * 通过resource加载单个映射文件  <mapper resource="com/guc/mybatis/mapper/UserMapper.xml"/>
+  * 通过 mapper 接口对象加载单个映射文件   <mapper class="com.guc.mybatis.mapper.UserMapper"/>
+  * 通过完全限定资源定位符   <mapper url="file:///E:/IdeaProjects/mybatis/src/main/java/com/guc/mybatis/mapper/UserMapper.xml"/>
+  * 通过mapper接口包加载整个包的映射文件   <package name="com.guc.mybatis.mapper"/>
+  
+## 映射文件[Mapper](https://mybatis.org/mybatis-3/zh/sqlmap-xml.html)
+映射文件的顶级元素
+* cache:给定命名空间的缓存配置
+* cache-ref:其他命名空间缓存配置的引用。
+* resultMap:描述如何从数据库结果集中来加载对象。
+* sql:可被其他语句引用的可重用语句块。
+```
+<sql id="selectAllUser">
+    select * from user
+</sql>
+
+<select id="selectUserById" parameterType="int" resultType="User">
+     <include refid="selectAllUser"/>
+            where id=#{id}
+</select>
+```
+* insert/update/delete/select 映射插入、更新、删除、查询语句。

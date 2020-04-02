@@ -35,8 +35,8 @@ public class UserTestApp {
 //        insertUser();
 //        updateUser();
 //        deleteUser();
-        selectUserById(9);
-//        selectAllUser();
+//        selectUserById(9);
+        selectAllUser();
     }
 
     // 新增用戶
