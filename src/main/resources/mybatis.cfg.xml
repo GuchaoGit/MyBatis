@@ -1,12 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <!-- 为 JavaBean 起类别名 -->
+
+    <!--1、用于配置一些数据库的信息-->
+    <properties resource="config.properties"/>
+
+    <!--2、改变 MyBatis 的运行时行为，如开启二级缓存、开启延迟加载等-->
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="lazyLoadingEnabled" value="false"/>
+    </settings>
+
+    <!-- 3、为JavaBean 起类别名 -->
     <typeAliases>
         <!-- 指定一个包名起别名，将包内的 Java 类的类名作为类的类别名 -->
-        <package name="com.guc.mybatis.entity" />
+        <!--  方法一：指定一个包名起别名，将包内的 Java 类的类名作为类的类别名-->
+        <package name="com.guc.mybatis.entity"/>
+        <!--方法二、给指定类起别名-->
+        <!--<typeAlias alias="User" type="com.guc.mybatis.entity.User"/>-->
     </typeAliases>
-
+    <!--4、自定义类型处理器-->
+    <typeHandlers>
+        <typeHandler handler="com.guc.mybatis.handler.CustomTypeHandler"/>
+        <!--处理枚举类型:存储数值-->
+        <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="java.math.RoundingMode"/>
+    </typeHandlers>
     <!--配置mybatis运行环境-->
     <environments default="development">
         <environment id="development">
@@ -14,18 +32,18 @@
             <transactionManager type="JDBC"/>
 
             <!-- POOLED 表示支持 JDBC 数据源连接池 -->
-            <!-- 数据库连接池，由 Mybatis 管理，数据库名是 mybatis，MySQL 用户名 root，密码为空 -->
+            <!-- 数据库连接池，由 Mybatis 管理，数据库由config.properties 文件配置 -->
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost/websites?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone = GMT"/>
-                <property name="username" value="root"/>
-                <property name="password" value="guc3306"/>
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
             </dataSource>
         </environment>
     </environments>
 
     <mappers>
         <!-- 通过 mapper 接口包加载整个包的映射文件 -->
-        <package name="com.guc.mybatis.mapper" />
+        <package name="com.guc.mybatis.mapper"/>
     </mappers>
 </configuration>

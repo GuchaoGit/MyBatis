@@ -50,7 +50,7 @@ public class UserTestApp {
         user.setSex("male");
         user.setAddress("zhengzhou");
         try {
-            mapper.insertUser(user);
+            mapper.insert(user);
             //3、进行插入，更新，删除操作时，要显示的提交事务
             session.commit();
         } catch (Exception e) {
@@ -68,13 +68,13 @@ public class UserTestApp {
         UserMapper mapper = session.getMapper(UserMapper.class);
         User user = null;
         try {
-            user = mapper.selectUserById(7);
+            user = mapper.selectById(7);
         } catch (Exception e1) {
             e1.printStackTrace();
         }
         user.setAddress("chongqing");
         try {
-            mapper.updateUser(user);
+            mapper.update(user);
             session.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -88,7 +88,7 @@ public class UserTestApp {
         SqlSession session = sqlSessionFactory.openSession();
         UserMapper mapper = session.getMapper(UserMapper.class);
         try {
-            mapper.deleteUser(7);
+            mapper.delete(7);
             session.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,7 +102,7 @@ public class UserTestApp {
         SqlSession session = sqlSessionFactory.openSession();
         UserMapper mapper = session.getMapper(UserMapper.class);
         try {
-            User user = mapper.selectUserById(id);
+            User user = mapper.selectById(id);
             session.commit();
             System.out.println(user.getId() + " " + user.getUsername() + " "
                     + user.getPassword() + " " + user.getSex() + " "
@@ -119,7 +119,7 @@ public class UserTestApp {
 
         UserMapper mapper = session.getMapper(UserMapper.class);
         try {
-            List<User> userList = mapper.selectAllUser();
+            List<User> userList = mapper.selectAll();
             session.commit();
             for (User user : userList) {
                 System.out.println(user.getId() + " " + user.getUsername() + " "

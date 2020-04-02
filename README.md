@@ -13,3 +13,26 @@ Mybatis 也是基于 JDBC 的。Java 与数据库操作仅能通过 JDBC 完成�
 * 创建方法接口UserMapper和定义映射文件UserMapper.xml
 * 日志记录log4j.properties
 * 测试运行
+
+## 配置文件
+* configuration 配置
+* properties 属性
+  * 首先读取properties元素体内指定的属性
+  * 然后根据 properties 元素中的 resource 属性读取类路径下属性文件或根据 url 属性指定的路径读取属性文件，并覆盖已读取的同名属性
+  * 最后读取作为方法参数传递的属性，并覆盖已读取的同名属性
+```
+<properties resource="config.properties"/>
+```
+* settings 设置  
+[settings](https://mybatis.org/mybatis-3/zh/configuration.html#settings) 是 MyBatis 极为重要的设置，它们会改变 MyBatis 的运行时行为，如开启二级缓存、开启延迟加载等
+* typeAliases 类型别名  
+[MyBatis中内建的别名](https://mybatis.org/mybatis-3/zh/configuration.html#typeAliases)
+* [typeHandlers](https://mybatis.org/mybatis-3/zh/configuration.html#typeHandlers) 类型处理器  
+作用是实现 JDBC 类型和 Java 类型的之间的转换
+* objectFactory 对象工厂
+* plugins 插件
+* environments 环境
+  * environment 环境变量
+  * transactionManager 事务管理器
+* databaseIdProvider 数据库厂商标识
+* mappers 映射器
