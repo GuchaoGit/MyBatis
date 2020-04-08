@@ -58,3 +58,6 @@ Mybatis 也是基于 JDBC 的。Java 与数据库操作仅能通过 JDBC 完成�
 </select>
 ```
 * insert/update/delete/select 映射插入、更新、删除、查询语句。
+
+## 更多
+[关联映射、动态sql、注解](https://github.com/GuchaoGit/MybatisMapper)
